@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
+import { WeatherData } from "../interface";
 
-const useWeather = (city: string, shouldFetch: boolean): {data: any, isLoading: boolean,error: any} => {
+const useWeather = (city: string, shouldFetch: boolean): {data: WeatherData | null, isLoading: boolean,error: Error | null} => {
     const [data, setData] = useState(null);
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState(null);

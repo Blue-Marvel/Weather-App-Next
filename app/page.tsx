@@ -76,7 +76,7 @@ const Home = () => {
              <h1 className=" text-black text-4xl font-semibold mb-3 ">
                 {data.main.temp}°C
               </h1>
-             <p>Partly cloudy</p>
+             <p>{data.weather[0].description}</p>
               </div> 
               <Image
                 src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
