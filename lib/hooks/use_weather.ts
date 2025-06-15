@@ -25,7 +25,7 @@ const useWeather = (city: string, shouldFetch: boolean): {data: any, isLoading: 
             }
         };
         fetchWeather();
-    }, [city, shouldFetch]);
+    }, [city, shouldFetch, url]);
 
     return {data, isLoading, error};
 }

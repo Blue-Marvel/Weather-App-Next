@@ -28,7 +28,7 @@ const Home = () => {
           setShouldFetch(true);
         }
       } catch (e) {
-        console.log("Failed to get city from location");
+        console.log("Failed to get city from location ", e);
       }
     });
   }, []);
