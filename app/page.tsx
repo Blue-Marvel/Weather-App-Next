@@ -8,39 +8,35 @@ const Home = () => {
   const [searchCity, setSearchCity] = useState("");
   const [shouldFetch, setShouldFetch] = useState(false);
 
-
-
   const { data, isLoading, error } = useWeather(searchCity, shouldFetch);
-
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (pos) => {
-        const {latitude, longitude} = pos.coords
+      const { latitude, longitude } = pos.coords;
 
-        const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`
+      const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`;
 
-        try {
-            const geoRes = await fetch(url);
-            const geoData = await geoRes.json()
-            console.log(geoData);
-            const currentCity = geoData[0]?.state;
+      try {
+        const geoRes = await fetch(url);
+        const geoData = await geoRes.json();
+        console.log(geoData);
+        const currentCity = geoData[0]?.state;
 
-            if(currentCity){
-              setSearchCity(currentCity);
-              setCity(currentCity);
-              setShouldFetch(true);
-            }
+        if (currentCity) {
+          setSearchCity(currentCity);
+          setCity(currentCity);
+          setShouldFetch(true);
         }
-     catch(e) {
+      } catch (e) {
         console.log("Failed to get city from location");
-        
-    }});
-}, []);
+      }
+    });
+  }, []);
 
   // console.log(error);
 
   const handleSearch = () => {
-    if(!city.trim()) return;
+    if (!city.trim()) return;
     setSearchCity(city);
     setShouldFetch(true);
   };
@@ -73,13 +69,22 @@ const Home = () => {
           </div>
           {/* details */}
           <div className=" p-8 rounded-4xl bg-white w-full max-w-md shadow-md">
-            <h2 className=" text-black text-2xl font-bold mb-5">{data.name}</h2>
-            <h1 className=" text-black text-4xl font-bold mb-6">
-              {data.main.temp}°C
-            </h1>
-            <p>Partly cloudy</p>
+            <h2 className=" text-black text-3xl font-semibold ">{data.name}</h2>
+            <div className=" flex space-x-4 items-center justify-between">
+             <div>
+             <h1 className=" text-black text-4xl font-semibold mb-3 ">
+                {data.main.temp}°C
+              </h1>
+             <p>Partly cloudy</p>
+              </div> 
+              <img
+                src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+                alt={data.weather[0].description}
+                className=" w-40 h-40"
+              />
+            </div>
             {/* Spacing linie */}
-            <div className=" w-full h-[0.1] bg-gray-400 mt-4 mb-4"></div>
+            <div className=" w-full h-[0.1] bg-gray-100 mt-4 mb-4 shadow-md"></div>
             {/* Humidity and wind */}
             <div className=" flex w-full">
               <div className=" w-full">
