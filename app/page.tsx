@@ -12,6 +12,16 @@ const Home = () => {
   const { data, isLoading, error } = useWeather(searchCity, shouldFetch);
 
   useEffect(() => {
+
+    const lastCity = localStorage.getItem('lastCity');
+
+    if (lastCity) {
+      setCity(lastCity);
+      setSearchCity(lastCity);
+      setShouldFetch(true);
+      return;
+    }
+
     navigator.geolocation.getCurrentPosition(async (pos) => {
       const { latitude, longitude } = pos.coords;
 
@@ -38,6 +48,7 @@ const Home = () => {
 
   const handleSearch = () => {
     if (!city.trim()) return;
+    localStorage.setItem('lastCity', city); // Save
     setSearchCity(city);
     setShouldFetch(true);
   };
