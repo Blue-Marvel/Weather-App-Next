@@ -5,12 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     // domains: [ "via.placeholder.com"],
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'via.placeholder.com',
-        // port: '',
-        pathname: '/150/**',
-      },
+      new URL('https://openweathermap.org/img/wn/**')
     ],
   },
   logging: {

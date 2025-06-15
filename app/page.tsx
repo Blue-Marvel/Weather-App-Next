@@ -2,6 +2,7 @@
 
 import { useWeather } from "@/lib/hooks/use_weather";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
 const Home = () => {
   const [city, setCity] = useState("");
@@ -52,7 +53,7 @@ const Home = () => {
           <h1 className=" text-black text-4xl font-bold mb-8">Weather App</h1>
           {/* Input field */}
 
-          <div className="flex gap-2 w-full max-w-md shadow-md overflow-hidden mb-8 bg-white rounded-full">
+          <div className="flex gap-2 w-full max-w-md shadow-md overflow-hidden mb-8 bg-white rounded-2xl">
             <input
               type="text"
               className="flex-1 px-4 py-3 outline-none text-gray-700"
@@ -62,13 +63,13 @@ const Home = () => {
             />
             <button
               onClick={handleSearch}
-              className=" bg-blue-500 rounded-full text-white px-6 py-2 font-semibold hover:bg-blue-600 cursor-pointer"
+              className=" bg-blue-500 rounded-2xl text-white px-6 py-2 font-semibold hover:bg-blue-600 cursor-pointer"
             >
               Search
             </button>
           </div>
           {/* details */}
-          <div className=" p-8 rounded-4xl bg-white w-full max-w-md shadow-md">
+          <div className=" p-8 rounded-2xl bg-white w-full max-w-md shadow-md">
             <h2 className=" text-black text-3xl font-semibold ">{data.name}</h2>
             <div className=" flex space-x-4 items-center justify-between">
              <div>
@@ -77,14 +78,16 @@ const Home = () => {
               </h1>
              <p>Partly cloudy</p>
               </div> 
-              <img
+              <Image
                 src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
                 alt={data.weather[0].description}
-                className=" w-40 h-40"
+                // className=" w-40 h-40"
+                width={100}
+                height={100}
               />
             </div>
             {/* Spacing linie */}
-            <div className=" w-full h-[0.1] bg-gray-100 mt-4 mb-4 shadow-md"></div>
+            <div className=" w-full h-[0.1] bg-gray-100 mt-2 mb-2 shadow-md"></div>
             {/* Humidity and wind */}
             <div className=" flex w-full">
               <div className=" w-full">
